@@ -25,8 +25,8 @@ ARTICLES = (
     'these',
     'those',
     'his',
-    'hers'
-    'their'
+    'hers',
+    'their',
 )
 
 WN = wordnet.WordNetLemmatizer()
