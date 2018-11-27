@@ -13,11 +13,12 @@ from scipy import random
 
 
 LEETMAP = collections.OrderedDict([
-    ('what', 'wat'),
-    ('ate', '8'),
-    ('at', '@'),
     ('anned', '&'),
     ('and', '&'),
+    ('what', 'wat'),
+    ('are', 'r'),
+    ('ate', '8'),
+    ('at', '@'),
     ('one', '1'),
     ('you', 'u'),
     ('t', '7'),
