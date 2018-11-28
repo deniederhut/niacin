@@ -2,6 +2,12 @@
 
 A Python library for replacing the missing variation in your data.
 
+[![PyPI version](https://badge.fury.io/py/niacin.svg)](https://badge.fury.io/py/niacin)
+[![travis](https://travis-ci.org/deniederhut/niacin.svg?branch=master)](https://travis-ci.org/deniederhut/niacin/)
+[![codecov](https://codecov.io/gh/deniederhut/niacin/branch/master/graph/badge.svg)](https://codecov.io/gh/deniederhut/niacin)
+[![readthedocs](https://readthedocs.org/projects/niacin/badge/?version=latest)](https://niacin.readthedocs.io/en/latest/?badge=latest)
+
+
 ## Why should I use this?
 
 Data collected for model training necessarily undersamples the likely
