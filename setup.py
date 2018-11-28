@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 #-*- encoding: utf-8 -*-
 
-from setuptools import setup
+from setuptools import setup, find_packages
 
 with open('README.md') as f:
     desc = f.read()
@@ -9,9 +9,7 @@ with open('README.md') as f:
 setup(
     name='niacin',
     version='0.1.0',
-    packages=[
-        'niacin.text'
-    ],
+    packages=find_packages(),
     package_data={
         'niacin': ['data/*']
     },
@@ -25,5 +23,5 @@ setup(
     tests_require=[
         'pytest',
         'pytest-cov'
-    ]
+    ],
 )
