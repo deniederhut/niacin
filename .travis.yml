@@ -38,7 +38,7 @@ before_install :
     - source activate test-environment
 
 install :
-    - pip install codecov
+    - pip install pytest pytest-cov codecov
     - python setup.py install
     - python scripts/nltk_helper.py
 
