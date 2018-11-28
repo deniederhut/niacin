@@ -10,7 +10,7 @@ setup(
     name='niacin',
     version='0.1.0',
     packages=[
-        'niacin'
+        'niacin.text'
     ],
     package_data={
         'niacin': ['data/*']
