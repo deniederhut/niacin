@@ -14,9 +14,9 @@ from scipy import random
 from nltk import wordnet
 
 
-HYPERNYMS = json.loads(resource_string('niacin', 'data/hypernyms.json'))
-HYPONYMS = json.loads(resource_string('niacin', 'data/hyponyms.json'))
-MISSPELLINGS = json.loads(resource_string('niacin', 'data/misspellings.json'))
+HYPERNYMS = json.loads(resource_string('niacin', 'data/hypernyms.json').decode('utf-8'))
+HYPONYMS = json.loads(resource_string('niacin', 'data/hyponyms.json').decode('utf-8'))
+MISSPELLINGS = json.loads(resource_string('niacin', 'data/misspellings.json').decode('utf-8'))
 
 
 ARTICLES = (
