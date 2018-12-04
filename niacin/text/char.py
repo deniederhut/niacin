@@ -28,7 +28,7 @@ LEETMAP = collections.OrderedDict([
     ('l', '1'),
 ])
 
-NEIGHBORS = json.loads(resource_string('niacin', 'data/neighbors.json'))
+NEIGHBORS = json.loads(resource_string('niacin', 'data/neighbors.json').decode('utf-8'))
 
 
 def _sub_chars(string: str, probability: float, mapping: typing.Mapping) -> str:
