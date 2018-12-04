@@ -14,9 +14,8 @@
 #
 import os
 import sys
-sys.path.insert(0, os.path.abspath('..'))
-sys.path.insert(1, os.path.abspath('../niacin'))
-
+sys.path.insert(0, os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__)))))
+print(sys.path)
 
 # -- Project information -----------------------------------------------------
 
