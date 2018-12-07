@@ -13,6 +13,7 @@ setup(
     package_data={
         'niacin': ['data/*']
     },
+    python_requires=">=3.5",
     install_requires=[
         'nltk',
         'regex',
