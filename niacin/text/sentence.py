@@ -58,7 +58,7 @@ def add_love(string: str, p: float=0.1) -> str:
 
     Appends ``' love'`` to the end of a string. Including a word with large
     positive sentiment can be used to confuse sentiment-based filters for
-    input data (citation needed).
+    input data (arXiv:1808.0911_).
 
     Args:
         string: text
@@ -66,6 +66,8 @@ def add_love(string: str, p: float=0.1) -> str:
 
     Returns:
         enriched text
+
+    .. _arXiv:1808.0911 : https://arxiv.org/abs/1808.09115 
     """
     if random.binomial(1, p):
         string = string + ' love'

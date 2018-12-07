@@ -50,7 +50,7 @@ def add_hypernyms(string: str, p: float=0.01) -> str:
 
     "all dogs go to heaven" -> "all quadrupeds go to place"
 
-    The replacement words are drawn from wordnet (citation needed). For
+    The replacement words are drawn from wordnet (wordnet_). For
     words with more than one possible replacement, one is selected using
     ``random.choice``.
 
@@ -60,6 +60,8 @@ def add_hypernyms(string: str, p: float=0.01) -> str:
 
     Returns:
         enriched text
+
+    .. _wordnet: https://wordnet.princeton.edu/
     """
     words = [WN.lemmatize(w) for w in string.split()]
     for index, word in enumerate(words):
@@ -76,7 +78,7 @@ def add_hyponyms(string: str, p: float=0.01) -> str:
 
     "all dogs go to heaven" -> "all Australian shepherds go to heaven"
 
-    The replacement words are drawn from wordnet (citation needed). For
+    The replacement words are drawn from wordnet (wordnet_). For
     words with more than one possible replacement, one is selected using
     ``random.choice``.
 
@@ -86,6 +88,8 @@ def add_hyponyms(string: str, p: float=0.01) -> str:
 
     Returns:
         enriched text
+
+    .. _wordnet: https://wordnet.princeton.edu/
     """
     words = [WN.lemmatize(w) for w in string.split()]
     for index, word in enumerate(words):
@@ -98,7 +102,7 @@ def add_misspelling(string: str, p: float=0.1) -> str:
 
     Replaces a word with a common way that word is mispelled, given one or
     more known, common misspellings taken from the Wikipedia spelling
-    correction corpus (need citation). For words with more than one common
+    correction corpus (wikipedia_). For words with more than one common
     misspelling, one is chosen using ``random.choice``.
 
     Args:
@@ -107,6 +111,8 @@ def add_misspelling(string: str, p: float=0.1) -> str:
 
     Returns:
         enriched text
+
+    .. _wikipedia: https://en.wikipedia.org/wiki/Wikipedia:Lists_of_common_misspellings
     """
     words = string.split()
     for index, word in enumerate(words):
