@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-#-*- encoding: utf-8 -*-
+# -*- encoding: utf-8 -*-
 
 """
 Sentence-based functions for enriching text data
@@ -9,10 +9,10 @@ import regex
 from scipy import random
 
 
-P_SPACE = regex.compile(r'(\s+)')
+P_SPACE = regex.compile(r"(\s+)")
 
 
-def add_applause(string: str, p: float=0.1) -> str:
+def add_applause(string: str, p: float = 0.1) -> str:
     """Replace whitespace with clapping emojis.
 
     In online communities, replacing whitespace delimiters with the clapping
@@ -28,10 +28,11 @@ def add_applause(string: str, p: float=0.1) -> str:
         enriched text
     """
     if random.binomial(1, p):
-        string = P_SPACE.sub('\U0001f44f', string)
+        string = P_SPACE.sub("\U0001f44f", string)
     return string
 
-def add_bytes(string: str, p: float=0.1, length: int=100) -> str:
+
+def add_bytes(string: str, p: float = 0.1, length: int = 100) -> str:
     """Add random bytes to the end of a sentence.
 
     A common spam disguising technique includes appending random sequences of
@@ -50,10 +51,11 @@ def add_bytes(string: str, p: float=0.1, length: int=100) -> str:
         enriched text
     """
     if random.binomial(1, p):
-        string = string + random.bytes(length).decode('utf-8', errors='replace')
+        string = string + random.bytes(length).decode("utf-8", errors="replace")
     return string
 
-def add_love(string: str, p: float=0.1) -> str:
+
+def add_love(string: str, p: float = 0.1) -> str:
     """Add love to the end of a sentence.
 
     Appends ``' love'`` to the end of a string. Including a word with large
@@ -67,8 +69,8 @@ def add_love(string: str, p: float=0.1) -> str:
     Returns:
         enriched text
 
-    .. _arXiv:1808.0911 : https://arxiv.org/abs/1808.09115 
+    .. _arXiv:1808.0911 : https://arxiv.org/abs/1808.09115
     """
     if random.binomial(1, p):
-        string = string + ' love'
+        string = string + " love"
     return string

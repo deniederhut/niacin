@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-#-*- encoding: utf-8 -*-
+# -*- encoding: utf-8 -*-
 
 """
 Character-based functions for enriching text data
@@ -13,22 +13,24 @@ import typing
 from scipy import random
 
 
-LEETMAP = collections.OrderedDict([
-    ('anned', '&'),
-    ('and', '&'),
-    ('what', 'wat'),
-    ('are', 'r'),
-    ('ate', '8'),
-    ('at', '@'),
-    ('one', '1'),
-    ('you', 'u'),
-    ('t', '7'),
-    ('o', '0'),
-    ('e', '3'),
-    ('l', '1'),
-])
+LEETMAP = collections.OrderedDict(
+    [
+        ("anned", "&"),
+        ("and", "&"),
+        ("what", "wat"),
+        ("are", "r"),
+        ("ate", "8"),
+        ("at", "@"),
+        ("one", "1"),
+        ("you", "u"),
+        ("t", "7"),
+        ("o", "0"),
+        ("e", "3"),
+        ("l", "1"),
+    ]
+)
 
-NEIGHBORS = json.loads(resource_string('niacin', 'data/neighbors.json').decode('utf-8'))
+NEIGHBORS = json.loads(resource_string("niacin", "data/neighbors.json").decode("utf-8"))
 
 
 def _sub_chars(string: str, probability: float, mapping: typing.Mapping) -> str:
@@ -39,13 +41,14 @@ def _sub_chars(string: str, probability: float, mapping: typing.Mapping) -> str:
             if index < 0:
                 break
             elif random.binomial(1, probability):
-                string = string[:index] + sub + string[index+len(pattern):]
+                string = string[:index] + sub + string[index + len(pattern) :]
                 index += len(sub)
             else:
                 index += len(pattern)
     return string
 
-def add_fat_thumbs(string: str, p: float=0.01) -> str:
+
+def add_fat_thumbs(string: str, p: float = 0.01) -> str:
     """Replace characters with QWERTY neighbors.
 
     One source of typographic mistakes comes from pressing a nearby key
@@ -63,10 +66,11 @@ def add_fat_thumbs(string: str, p: float=0.01) -> str:
     for index, char in enumerate(string):
         if char in NEIGHBORS and random.binomial(1, p):
             new_char = random.choice(NEIGHBORS[char])
-            string = string[:index] + new_char + string[index+1:]
+            string = string[:index] + new_char + string[index + 1 :]
     return string
 
-def add_leet(string: str, p: float=0.2) -> str:
+
+def add_leet(string: str, p: float = 0.2) -> str:
     """Replace character groups with visually or aurally similar ones.
 
     Character groups given in ``LEETMAP.keys()`` are searched for in
@@ -88,7 +92,8 @@ def add_leet(string: str, p: float=0.2) -> str:
     """
     return _sub_chars(string, probability=p, mapping=LEETMAP)
 
-def add_whitespace(string: str, p: float=0.01) -> str:
+
+def add_whitespace(string: str, p: float = 0.01) -> str:
     """Remove a spacebar characters with probability p.
 
     Selective removal of whitespace can be reduce the effectiveness of word-
@@ -102,13 +107,14 @@ def add_whitespace(string: str, p: float=0.01) -> str:
     Returns:
         enriched text
     """
-    space = ' '
+    space = " "
     for index in range(len(string), -1, -1):
         if random.binomial(1, p):
             string = string[:index] + space + string[index:]
     return string
 
-def remove_whitespace(string: str, p: float=0.1) -> str:
+
+def remove_whitespace(string: str, p: float = 0.1) -> str:
     """Remove a spacebar characters with probability p.
 
     Selective removal of whitespace can be reduce the effectiveness of word-
@@ -122,5 +128,5 @@ def remove_whitespace(string: str, p: float=0.1) -> str:
     Returns:
         enriched text
     """
-    mapping = {' ': ''}
+    mapping = {" ": ""}
     return _sub_chars(string, probability=p, mapping=mapping)

@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-#-*- encoding: utf-8 -*-
+# -*- encoding: utf-8 -*-
 
 """
 Word-based functions for enriching text data
@@ -14,21 +14,14 @@ from scipy import random
 from nltk import wordnet
 
 
-HYPERNYMS = json.loads(resource_string('niacin', 'data/hypernyms.json').decode('utf-8'))
-HYPONYMS = json.loads(resource_string('niacin', 'data/hyponyms.json').decode('utf-8'))
-MISSPELLINGS = json.loads(resource_string('niacin', 'data/misspellings.json').decode('utf-8'))
-
-
-ARTICLES = (
-    'the',
-    'a',
-    'an',
-    'these',
-    'those',
-    'his',
-    'hers',
-    'their',
+HYPERNYMS = json.loads(resource_string("niacin", "data/hypernyms.json").decode("utf-8"))
+HYPONYMS = json.loads(resource_string("niacin", "data/hyponyms.json").decode("utf-8"))
+MISSPELLINGS = json.loads(
+    resource_string("niacin", "data/misspellings.json").decode("utf-8")
 )
+
+
+ARTICLES = ("the", "a", "an", "these", "those", "his", "hers", "their")
 
 WN = wordnet.WordNetLemmatizer()
 
@@ -39,9 +32,10 @@ def _sub_words(string: str, probability: float, mapping: typing.Mapping) -> str:
         for index, word in enumerate(words):
             if (word.lower() == pattern) and random.binomial(1, probability):
                 words[index] = sub
-    return ' '.join(word for word in words if word)
+    return " ".join(word for word in words if word)
 
-def add_hypernyms(string: str, p: float=0.01) -> str:
+
+def add_hypernyms(string: str, p: float = 0.01) -> str:
     """Replace word with a higher-level category.
 
     A common negative sampling technique involves replacing words
@@ -67,9 +61,10 @@ def add_hypernyms(string: str, p: float=0.01) -> str:
     for index, word in enumerate(words):
         if (word in HYPERNYMS) and random.binomial(1, p):
             words[index] = random.choice(HYPERNYMS[word])
-    return ' '.join(words)
+    return " ".join(words)
 
-def add_hyponyms(string: str, p: float=0.01) -> str:
+
+def add_hyponyms(string: str, p: float = 0.01) -> str:
     """Replace word with a lower-level category.
 
     A common negative sampling technique involves replacing words
@@ -95,9 +90,10 @@ def add_hyponyms(string: str, p: float=0.01) -> str:
     for index, word in enumerate(words):
         if (word in HYPONYMS) and random.binomial(1, p):
             words[index] = random.choice(HYPONYMS[word])
-    return ' '.join(words)
+    return " ".join(words)
 
-def add_misspelling(string: str, p: float=0.1) -> str:
+
+def add_misspelling(string: str, p: float = 0.1) -> str:
     """Replace words with common misspellings.
 
     Replaces a word with a common way that word is mispelled, given one or
@@ -118,9 +114,10 @@ def add_misspelling(string: str, p: float=0.1) -> str:
     for index, word in enumerate(words):
         if (word in MISSPELLINGS) and random.binomial(1, p):
             words[index] = random.choice(MISSPELLINGS[word])
-    return ' '.join(words)
+    return " ".join(words)
 
-def add_parens(string: str, p: float=0.01) -> str:
+
+def add_parens(string: str, p: float = 0.01) -> str:
     """Wrap individual words in triple parentheses.
 
     Adds parentheses before and after a word, e.g. ``(((term)))``.
@@ -137,10 +134,11 @@ def add_parens(string: str, p: float=0.01) -> str:
     words = string.split()
     for index, word in enumerate(words):
         if random.binomial(1, p):
-            words[index] = '(((' + word + ')))'
-    return ' '.join(words)
+            words[index] = "(((" + word + ")))"
+    return " ".join(words)
 
-def remove_articles(string: str, p: float=1.0) -> str:
+
+def remove_articles(string: str, p: float = 1.0) -> str:
     """Remove articles from text data.
 
     Matches and removes the following articles:
@@ -161,5 +159,5 @@ def remove_articles(string: str, p: float=1.0) -> str:
     Returns:
         enriched text
     """
-    mapping = {article: '' for article in ARTICLES}
+    mapping = {article: "" for article in ARTICLES}
     return _sub_words(string, probability=p, mapping=mapping)
