@@ -30,6 +30,10 @@ LEETMAP = collections.OrderedDict(
     ]
 )
 
+CONTRACT = json.loads(
+    resource_string("niacin", "data/contractions.json").decode("utf-8")
+)
+EXPAND = {v: k for k, v in CONTRACT.items()}
 NEIGHBORS = json.loads(resource_string("niacin", "data/neighbors.json").decode("utf-8"))
 
 
@@ -68,6 +72,41 @@ def add_fat_thumbs(string: str, p: float = 0.01) -> str:
             new_char = random.choice(NEIGHBORS[char])
             string = string[:index] + new_char + string[index + 1 :]
     return string
+
+
+def add_contractions(string: str, p: float = 0.5) -> str:
+    """Replace common word pairs with their contraction.
+
+    This is done even when the contraction introduces ambiguity, as this is
+    seen as preserving the semantics (arXiv:1812.04718_).
+
+    Args:
+        string: text
+        p: probability of a word pair being replaced
+
+    Returns:
+        enriched text
+
+    .. _arXiv:1812.04718 : https://arxiv.org/abs/1812.04718
+    """
+    return _sub_chars(string, probability=p, mapping=CONTRACT)
+
+
+def add_expansions(string: str, p: float = 0.5) -> str:
+    """Expand a contraction into individual tokens.
+
+    See (arXiv:1812.04718_).
+
+    Args:
+        string: text
+        p: probability of a word pair being replaced
+
+    Returns:
+        enriched text
+
+    .. _arXiv:1812.04718 : https://arxiv.org/abs/1812.04718
+    """
+    return _sub_chars(string, probability=p, mapping=EXPAND)
 
 
 def add_leet(string: str, p: float = 0.2) -> str:
