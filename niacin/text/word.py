@@ -19,6 +19,7 @@ HYPONYMS = json.loads(resource_string("niacin", "data/hyponyms.json").decode("ut
 MISSPELLINGS = json.loads(
     resource_string("niacin", "data/misspellings.json").decode("utf-8")
 )
+SYNONYMS = json.loads(resource_string("niacin", "data/synonyms.json").decode("utf-8"))
 
 
 ARTICLES = ("the", "a", "an", "these", "those", "his", "hers", "their")
@@ -135,6 +136,36 @@ def add_parens(string: str, p: float = 0.01) -> str:
     for index, word in enumerate(words):
         if random.binomial(1, p):
             words[index] = "(((" + word + ")))"
+    return " ".join(words)
+
+
+def add_synonyms(string: str, p: float = 0.01) -> str:
+    """Replace word with one that has a close meaning.
+
+    A common data augmentation technique involves replacing words
+    in a sentence with a word that has the same general meaning
+    (arxiv:1509.01626_), e.g.:
+
+    "all dogs go to heaven" -> "all domestic dog depart to heaven"
+
+    The replacement words are drawn from wordnet (wordnet_). For
+    words with more than one possible replacement, one is selected using
+    ``random.choice``.
+
+    Args:
+        string: text
+        p: conditional probability of replacing a word
+
+    Returns:
+        enriched text
+
+    .. _arxiv:1509.01626 : https://arxiv.org/abs/1509.01626
+    .. _wordnet: https://wordnet.princeton.edu/
+    """
+    words = [WN.lemmatize(w) for w in string.split()]
+    for index, word in enumerate(words):
+        if (word in SYNONYMS) and random.binomial(1, p):
+            words[index] = random.choice(SYNONYMS[word])
     return " ".join(words)
 
 
