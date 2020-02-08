@@ -36,6 +36,34 @@ def test_add_leet(string, p, exp):
     [
         ("", 0.0, ""),
         ("", 1.0, ""),
+        ("alice is not dead", 0.0, "alice is not dead"),
+        ("alice is not dead", 1.0, "alice isn't dead"),
+    ],
+)
+def test_add_contractions(string, p, exp):
+    res = char.add_contractions(string, p)
+    assert res == exp
+
+
+@pytest.mark.parametrize(
+    "string,p,exp",
+    [
+        ("", 0.0, ""),
+        ("", 1.0, ""),
+        ("alice isn't dead", 0.0, "alice isn't dead"),
+        ("alice isn't dead", 1.0, "alice is not dead"),
+    ],
+)
+def test_add_expansionss(string, p, exp):
+    res = char.add_expansions(string, p)
+    assert res == exp
+
+
+@pytest.mark.parametrize(
+    "string,p,exp",
+    [
+        ("", 0.0, ""),
+        ("", 1.0, ""),
         ("The man has a brown dog", 0.0, "The man has a brown dog"),
         ("The man has a brown dog", 1.0, "Themanhasabrowndog"),
     ],
