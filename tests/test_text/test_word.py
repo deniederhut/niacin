@@ -72,6 +72,20 @@ def test_add_hypernyms(string, p, exp):
 
 @pytest.mark.parametrize(
     "string,p,exp",
+    [
+        ("", 0.0, ""),
+        ("", 1.0, ""),
+        ("It is computable", 0.0, "It is computable"),
+        ("It is computable", 1.0, "It is estimable"),
+    ],
+)
+def test_add_synonyms(string, p, exp):
+    res = word.add_synonyms(string, p)
+    assert res == exp
+
+
+@pytest.mark.parametrize(
+    "string,p,exp",
     [("", 0.0, ""), ("", 1.0, ""), ("dog", 0.0, "dog"), ("dog", 1.0, "(((dog)))")],
 )
 def test_add_parens(string, p, exp):
