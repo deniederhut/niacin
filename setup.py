@@ -8,7 +8,7 @@ with open('README.md') as f:
 
 setup(
     name='niacin',
-    version='0.1.1',
+    version='0.2.0',
     packages=find_packages(),
     package_data={
         'niacin': ['data/*']
