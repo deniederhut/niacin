@@ -1,5 +1,5 @@
 ---
-title: 'niacin: A Python package for data enrichment'
+title: 'niacin: A Python package for text data enrichment'
 tags:
   - data augmentation
   - natural language processing

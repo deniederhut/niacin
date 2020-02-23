@@ -1,6 +1,6 @@
 # niacin
 
-A Python library for replacing the missing variation in your data.
+A Python library for replacing the missing variation in your text data.
 
 [![PyPI version](https://badge.fury.io/py/niacin.svg)](https://badge.fury.io/py/niacin)
 [![travis](https://travis-ci.org/deniederhut/niacin.svg?branch=master)](https://travis-ci.org/deniederhut/niacin/)
