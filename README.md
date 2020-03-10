@@ -58,3 +58,25 @@ from source:
 ```sh
 git clone git@github.com:deniederhut/niacin.git && cd niacin && python setup.py install
 ```
+
+If you have installed `niacin` from source, you can run the test suite to verify that
+everything is working properly. We use [`pytest`](https://docs.pytest.org/en/latest/),
+which you will first need to install:
+
+```sh
+pip install pytest
+```
+
+then you can run the library's tests with
+
+```sh
+pytest
+```
+
+if you would like to see the coverage report, you can do so with `pytest-cov`
+like so:
+
+```sh
+pip install pytest-cov
+pytest --cov=niacin && coverage html
+```
