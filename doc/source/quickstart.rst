@@ -30,6 +30,7 @@ enrichment:
 
 .. code:: python
 
+    from niacin import text
     data = "This is the song that never ends and it goes on and on my friends"
     print(text.add_misspelling(data, p=1.0))
 
@@ -41,6 +42,7 @@ negative sampling:
 
 .. code:: python
 
+    from niacin import text
     data = "This is the song that never ends and it goes on and on my friends"
     print(text.add_hypernyms(data, p=1.0))
 

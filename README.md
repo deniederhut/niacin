@@ -26,6 +26,7 @@ transformed, and the probability of applying a specific transformation.
 enrichment:
 
 ```python
+from niacin import text
 data = "This is the song that never ends and it goes on and on my friends"
 print(text.add_misspelling(data, p=1.0))
 ```
@@ -37,6 +38,7 @@ This is teh song tath never ends adn it goes on anbd on my firends
 negative sampling:
 
 ```python
+from niacin import text
 data = "This is the song that never ends and it goes on and on my friends"
 print(text.add_hypernyms(data, p=1.0))
 ```
