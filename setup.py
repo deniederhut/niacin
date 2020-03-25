@@ -11,7 +11,7 @@ setup(
     version='0.2.0',
     packages=find_packages(),
     package_data={
-        'niacin': ['data/*']
+        'niacin': ['data/*', 'py.typed']
     },
     python_requires=">=3.5",
     install_requires=[
