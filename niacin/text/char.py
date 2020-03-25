@@ -148,15 +148,15 @@ def add_leet(string: str, p: float = 0.2) -> str:
 
 
 def add_whitespace(string: str, p: float = 0.01) -> str:
-    """Remove a spacebar characters with probability p.
+    """Add a spacebar character with probability p.
 
-    Selective removal of whitespace can be reduce the effectiveness of word-
-    based models, or those which depend on word tokenizers as part of the
-    data pipeline.
+    Extraneous whitespace, especially when it occurs in the middle of an
+    important word, can be reduce the effectiveness of models which depend
+    on word tokenizers as part of the data pipeline.
 
     Args:
         string: text
-        p: probability of removing a space character
+        p: probability of adding a space character
 
     Returns:
         enriched text
@@ -169,7 +169,7 @@ def add_whitespace(string: str, p: float = 0.01) -> str:
 
 
 def remove_whitespace(string: str, p: float = 0.1) -> str:
-    """Remove a spacebar characters with probability p.
+    """Remove a spacebar character with probability p.
 
     Selective removal of whitespace can be reduce the effectiveness of word-
     based models, or those which depend on word tokenizers as part of the
