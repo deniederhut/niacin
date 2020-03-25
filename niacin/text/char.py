@@ -38,6 +38,21 @@ NEIGHBORS = json.loads(resource_string("niacin", "data/neighbors.json").decode("
 
 
 def _sub_chars(string: str, probability: float, mapping: typing.Mapping) -> str:
+    """Replace substrings with a given probability.
+
+    Given a mapping, search string one by one for keys and replace with
+    the appropriate value, with some probability. If your keys are not mutually
+    exclusive (e.g. some part of them overlaps), the order in which they appear
+    in the mapping becomes important.
+
+    Args:
+        string: text
+        probability: probability of replacing a group of characters
+        mapping: map of substring -> replacement
+
+    Returns:
+        enriched text
+    """
     for pattern, sub in mapping.items():
         index = 0
         while 0 <= index < len(string):
