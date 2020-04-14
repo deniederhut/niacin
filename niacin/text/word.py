@@ -28,6 +28,20 @@ WN = wordnet.WordNetLemmatizer()
 
 
 def _sub_words(string: str, probability: float, mapping: typing.Mapping) -> str:
+    """Replace words with a given probability.
+
+    Split a string into words (the naïve way, on whitespace). Then, search
+    word list for each key in the mapping, and replace it with its value with
+    some probability. Then join them back together with a single whitespace.
+
+    Args:
+        string: text
+        probability: probability of replacing a word
+        mapping: map of substring -> replacement
+
+    Returns:
+        enriched text
+    """
     words = string.split()
     for pattern, sub in mapping.items():
         for index, word in enumerate(words):

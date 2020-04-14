@@ -38,6 +38,21 @@ NEIGHBORS = json.loads(resource_string("niacin", "data/neighbors.json").decode("
 
 
 def _sub_chars(string: str, probability: float, mapping: typing.Mapping) -> str:
+    """Replace substrings with a given probability.
+
+    Given a mapping, search string one by one for keys and replace with
+    the appropriate value, with some probability. If your keys are not mutually
+    exclusive (e.g. some part of them overlaps), the order in which they appear
+    in the mapping becomes important.
+
+    Args:
+        string: text
+        probability: probability of replacing a group of characters
+        mapping: map of substring -> replacement
+
+    Returns:
+        enriched text
+    """
     for pattern, sub in mapping.items():
         index = 0
         while 0 <= index < len(string):
@@ -133,15 +148,15 @@ def add_leet(string: str, p: float = 0.2) -> str:
 
 
 def add_whitespace(string: str, p: float = 0.01) -> str:
-    """Remove a spacebar characters with probability p.
+    """Add a spacebar character with probability p.
 
-    Selective removal of whitespace can be reduce the effectiveness of word-
-    based models, or those which depend on word tokenizers as part of the
-    data pipeline.
+    Extraneous whitespace, especially when it occurs in the middle of an
+    important word, can be reduce the effectiveness of models which depend
+    on word tokenizers as part of the data pipeline.
 
     Args:
         string: text
-        p: probability of removing a space character
+        p: probability of adding a space character
 
     Returns:
         enriched text
@@ -154,7 +169,7 @@ def add_whitespace(string: str, p: float = 0.01) -> str:
 
 
 def remove_whitespace(string: str, p: float = 0.1) -> str:
-    """Remove a spacebar characters with probability p.
+    """Remove a spacebar character with probability p.
 
     Selective removal of whitespace can be reduce the effectiveness of word-
     based models, or those which depend on word tokenizers as part of the
