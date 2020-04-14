@@ -50,7 +50,6 @@ before_install :
 install :
     - pip install pytest pytest-cov codecov
     - python setup.py install
-    - python scripts/nltk_helper.py
 
 script : py.test --cov=niacin
 

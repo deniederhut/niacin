@@ -24,7 +24,17 @@ SYNONYMS = json.loads(resource_string("niacin", "data/synonyms.json").decode("ut
 
 ARTICLES = ("the", "a", "an", "these", "those", "his", "hers", "their")
 
-WN = wordnet.WordNetLemmatizer()
+
+def _get_wordnet():
+    try:
+        wn = wordnet.WordNetLemmatizer()
+        wn.lemmatize('this is a test')
+    except:
+        print("Missing wordnet data -- attempting to download")
+        import nltk
+        nltk.download('wordnet')
+        wn = wordnet.WordNetLemmatizer()
+    return wn
 
 
 def _sub_words(string: str, probability: float, mapping: typing.Mapping) -> str:
@@ -72,7 +82,8 @@ def add_hypernyms(string: str, p: float = 0.01) -> str:
 
     .. _wordnet: https://wordnet.princeton.edu/
     """
-    words = [WN.lemmatize(w) for w in string.split()]
+    wn = _get_wordnet()
+    words = [wn.lemmatize(w) for w in string.split()]
     for index, word in enumerate(words):
         if (word in HYPERNYMS) and random.binomial(1, p):
             words[index] = random.choice(HYPERNYMS[word])
@@ -101,7 +112,8 @@ def add_hyponyms(string: str, p: float = 0.01) -> str:
 
     .. _wordnet: https://wordnet.princeton.edu/
     """
-    words = [WN.lemmatize(w) for w in string.split()]
+    wn = _get_wordnet()
+    words = [wn.lemmatize(w) for w in string.split()]
     for index, word in enumerate(words):
         if (word in HYPONYMS) and random.binomial(1, p):
             words[index] = random.choice(HYPONYMS[word])
@@ -176,7 +188,8 @@ def add_synonyms(string: str, p: float = 0.01) -> str:
     .. _arxiv:1509.01626 : https://arxiv.org/abs/1509.01626
     .. _wordnet: https://wordnet.princeton.edu/
     """
-    words = [WN.lemmatize(w) for w in string.split()]
+    wn = _get_wordnet()
+    words = [wn.lemmatize(w) for w in string.split()]
     for index, word in enumerate(words):
         if (word in SYNONYMS) and random.binomial(1, p):
             words[index] = random.choice(SYNONYMS[word])
