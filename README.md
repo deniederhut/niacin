@@ -82,3 +82,25 @@ like so:
 pip install pytest-cov
 pytest --cov=niacin && coverage html
 ```
+
+## How can I install the optional dependencies?
+
+If you want to use the backtranslate functionality, niacin will need pytorch and some other
+libraries. These can be installed as extras with:
+
+```sh
+pip install niacin[backtranslate]
+```
+
+If you are on macos, this might fail with a warning about your version of gcc:
+
+```
+Your compiler (g++) is not compatible with the compiler Pytorch was
+built with for this platform, which is clang++ on darwin.
+```
+
+You can avoid this error by executing the following:
+
+```sh
+CFLAGS='-stdlib=libc++' pip install niacin[backtranslate]
+```
