@@ -7,9 +7,54 @@ Sentence-based functions for enriching text data
 
 import regex
 from scipy import random
+import warnings
 
 
 P_SPACE = regex.compile(r"(\s+)")
+
+
+class Translator:
+
+    translators: dict = {}
+
+    def __init__(self):
+        self.load_models()
+        self.en2de = self.translators["en2de"].translate
+        self.de2en = self.translators["de2en"].translate
+
+    @classmethod
+    def load_models(cls, force: bool = False):
+        warnings.warn(
+            "Backtranslation uses large translation models (~6GB) and can "
+            "hours to download on the first use."
+        )
+        try:
+            import torch
+        except ImportError:
+            raise ImportError(
+                "torch not found - you may need to install extras with"
+                "'pip install niacin[all]'"
+            )
+        if force or "en2de" not in cls.translators:
+            cls.translators["en2de"] = torch.hub.load(
+                "pytorch/fairseq",
+                "transformer.wmt19.en-de.single_model",
+                tokenizer="moses",
+                bpe="fastbpe",
+            )
+        if force or "de2en" not in cls.translators:
+            cls.translators["de2en"] = torch.hub.load(
+                "pytorch/fairseq",
+                "transformer.wmt19.de-en.single_model",
+                tokenizer="moses",
+                bpe="fastbpe",
+            )
+        # turn off dropout
+        for name, model in cls.translators.items():
+            model.eval()
+
+    def backtranslate(self, string: str) -> str:
+        return self.de2en(self.en2de(string))
 
 
 def add_applause(string: str, p: float = 0.1) -> str:
@@ -73,4 +118,40 @@ def add_love(string: str, p: float = 0.1) -> str:
     """
     if random.binomial(1, p):
         string = string + " love"
+    return string
+
+
+def add_backtranslation(string: str, p: float = 0.5) -> str:
+    """Translate a sentence into another language and back.
+
+    Use a fairseq model to translate a sentence from Enligh into German,
+    then translate the German back into English with another fairseq model
+    (_arXiv:1904.01038). Anecdotally, this generates sequences with similar
+    semantic content, but different word choices, and is a popular way to
+    augment small datasets in high resource languages (_arXiv:1904.12848).
+
+    .. warning::
+        Backtranslation uses large neural machine translation (NMT)
+        models. The first time you call this function, it will download
+        and cache up to 6GB of data, which can take hours depending on your
+        connection speed. The slowness only happens once, but the model size
+        will impact memory usage every time you use this function.
+
+    Args:
+        string: text
+        p: probability of backtranslating a sentence
+
+    Returns:
+        enriched text
+
+    .. _arXiv:1904.01038 : https://arxiv.org/abs/1904.01038
+    .. _arXiv:1904.12848 : https://arxiv.org/abs/1904.12848
+
+    """
+    # the fairseq models do weird stuff with empty strings
+    if not string:
+        return string
+    if random.binomial(1, p):
+        t = Translator()
+        string = t.backtranslate(string)
     return string

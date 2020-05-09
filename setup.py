@@ -13,12 +13,16 @@ setup(
     package_data={
         'niacin': ['data/*', 'py.typed']
     },
-    python_requires=">=3.5",
+    python_requires=">=3.6",
     install_requires=[
         'nltk',
         'regex',
         'scipy',
     ],
+    extras_require={
+        'all': ['fairseq', 'fastbpe', 'sacremoses', 'torch'],
+        'backtranslate': ['fairseq', 'fastbpe', 'sacremoses', 'torch']
+    },
     long_description=desc,
     long_description_content_type="text/markdown",
     tests_require=[
