@@ -8,6 +8,7 @@ Character-based functions for enriching text data
 import collections
 import json
 from pkg_resources import resource_string
+from string import ascii_letters, punctuation
 import typing
 
 from scipy import random
@@ -89,6 +90,26 @@ def add_fat_thumbs(string: str, p: float = 0.01) -> str:
     return string
 
 
+def add_characters(string: str, p: float = 0.01) -> str:
+    """Insert individual characters with probability p.
+
+    These are chosen randomly from the ascii alphabet (including
+    both upper and lower cases).
+
+    Args:
+        string: text
+        p: probability of removing a character
+
+    Returns:
+        enriched text
+    """
+    for index in reversed(range(len(string))):
+        if random.binomial(1, p):
+            new_char = random.choice(list(ascii_letters))
+            string = string[:index] + new_char + string[index:]
+    return string
+
+
 def add_contractions(string: str, p: float = 0.5) -> str:
     """Replace common word pairs with their contraction.
 
@@ -166,6 +187,41 @@ def add_whitespace(string: str, p: float = 0.01) -> str:
         if random.binomial(1, p):
             string = string[:index] + space + string[index:]
     return string
+
+
+def remove_characters(string: str, p: float = 0.01) -> str:
+    """Remove individual characters with probability p.
+
+    Args:
+        string: text
+        p: probability of removing a character
+
+    Returns:
+        enriched text
+    """
+    for index in reversed(range(len(string))):
+        if random.binomial(1, p):
+            string = string[:index] + string[index + 1 :]
+    return string
+
+
+def remove_punctuation(string: str, p: float = 0.25) -> str:
+    """Remove punctuation with probability p.
+
+    The removal of punctuation is a common data cleaning step for fast but
+    high bias models and data processing algorithms. When that punctuation
+    occurs in the middle of the word (e.g. indicating possessiveness), its
+    removal may change the semantics of the string.
+
+    Args:
+        string: text
+        p: probability of removing punctuation
+
+    Returns:
+        enriched text
+    """
+    mapping = {k: "" for k in punctuation}
+    return _sub_chars(string, probability=p, mapping=mapping)
 
 
 def remove_whitespace(string: str, p: float = 0.1) -> str:
