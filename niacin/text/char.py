@@ -184,3 +184,36 @@ def remove_whitespace(string: str, p: float = 0.1) -> str:
     """
     mapping = {" ": ""}
     return _sub_chars(string, probability=p, mapping=mapping)
+
+
+def swap_chars(string: str, p: float = 0.05) -> str:
+    """Swap adjacent characters.
+
+    With probability p, swap two adjacent characters in a string. No
+    character gets swapped more than once, so cannot end up in any locations
+    that are not adjacent to its starting position.
+
+    Note: to keep the interface consistent, niacin's implementation acts on
+    a probability p, applied n-1 times, where n is the total number of
+    characters in the string. The implementation in noisemix_ (called
+    ``flip_chars``) chooses two letters at random and exchanges their
+    positions, exactly once per string.
+
+    Args:
+        string: text
+        p: probability of swapping two characters
+
+    Returns:
+        enriched text
+
+    .. _noisemix : https://github.com/noisemix/noisemix
+    """
+    chars = list(string)
+    index = 0
+    while index < len(chars)-1:
+        if random.binomial(1, p):
+            chars[index], chars[index+1] = chars[index+1], chars[index]
+            index += 2
+        else:
+            index += 1
+    return "".join(chars)
