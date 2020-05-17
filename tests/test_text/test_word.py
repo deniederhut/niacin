@@ -91,3 +91,16 @@ def test_add_synonyms(string, p, exp):
 def test_add_parens(string, p, exp):
     res = word.add_parens(string, p)
     assert res == exp
+
+@pytest.mark.parametrize(
+    "string,p,exp",
+    [
+        ("", 0.0, ""),
+        ("", 1.0, ""),
+        ("The man has a brown dog", 0.0, "The man has a brown dog"),
+        ("The man has a brown dog", 1.0, "man The a has dog brown"),
+    ],
+)
+def test_swap_words(string, p, exp):
+    res = word.swap_words(string, p)
+    assert res == exp
