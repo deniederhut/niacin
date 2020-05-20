@@ -7,6 +7,14 @@ import pytest
 from niacin.text import char
 
 
+@pytest.mark.parametrize(
+    "string,p,l", [("", 0.0, 0), ("", 1.0, 0), ("bob", 0.0, 3), ("bob", 1.0, 6)]
+)
+def test_add_characters(string, p, l):
+    res = char.add_characters(string, p)
+    assert len(res) == l
+
+
 @pytest.mark.parametrize("string", [(""), ("qwerty")])
 def test_add_fat_thumbs(string):
     res = char.add_fat_thumbs(string, 0.0)
@@ -57,6 +65,30 @@ def test_add_contractions(string, p, exp):
 def test_add_expansionss(string, p, exp):
     res = char.add_expansions(string, p)
     assert res == exp
+
+
+@pytest.mark.parametrize(
+    "string,p,l", [("", 0.0, 0), ("", 1.0, 0), ("bob", 0.0, 3), ("bob", 1.0, 0)]
+)
+def test_remove_characters(string, p, l):
+    res = char.remove_characters(string, p)
+    assert len(res) == l
+
+
+@pytest.mark.parametrize(
+    "string,p,l",
+    [
+        ("", 0.0, 0),
+        ("", 1.0, 0),
+        (r"""~`!'";:,.<>[]\_-""", 0.0, 16),
+        (r"""~`!'";:,.<>[]\#$""", 1.0, 0),
+        (r"""bob~`!'";:,.<>[]\@&""", 0.0, 19),
+        (r"""bob~`!'";:,.<>[]\{}""", 1.0, 3),
+    ],
+)
+def test_remove_punctuation(string, p, l):
+    res = char.remove_punctuation(string, p)
+    assert len(res) == l
 
 
 @pytest.mark.parametrize(
