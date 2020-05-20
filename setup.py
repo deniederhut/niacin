@@ -6,6 +6,9 @@ from setuptools import setup, find_packages
 with open('README.md') as f:
     desc = f.read()
 
+with open('requirements.txt') as f:
+    install_requirements = f.read().splitlines()
+
 setup(
     name='niacin',
     version='0.2.0',
@@ -14,11 +17,7 @@ setup(
         'niacin': ['data/*', 'py.typed']
     },
     python_requires=">=3.6",
-    install_requires=[
-        'nltk',
-        'regex',
-        'scipy',
-    ],
+    install_requires=install_requirements,
     extras_require={
         'all': ['fairseq', 'fastbpe', 'sacremoses', 'torch'],
         'backtranslate': ['fairseq', 'fastbpe', 'sacremoses', 'torch']
