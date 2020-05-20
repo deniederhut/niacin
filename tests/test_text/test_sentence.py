@@ -44,3 +44,20 @@ def test_add_bytes(string, p, length, exp):
     res = sentence.add_bytes(string, p, length)
     assert res[: len(string)] == string
     assert abs(len(res) - exp) < 5
+
+
+@pytest.mark.slow
+@pytest.mark.parametrize(
+    "string,p,exp",
+    [
+        ("", 0.0, ""),
+        ("", 1.0, ""),
+        ("this is a test", 0.0, "this is a test"),
+        ("this is a test", 1.0, "This is a test"),
+        ("He asked if she said it", 0.0, "He asked if she said it"),
+        ("He asked if she said it", 1.0, "He asked if she had said it"),
+    ],
+)
+def test_backtranslation(string, p, exp):
+    res = sentence.add_backtranslation(string, p)
+    assert res == exp
