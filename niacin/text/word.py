@@ -219,3 +219,36 @@ def remove_articles(string: str, p: float = 1.0) -> str:
     """
     mapping = {article: "" for article in ARTICLES}
     return _sub_words(string, probability=p, mapping=mapping)
+
+
+def swap_words(string: str, p: float = 0.01) -> str:
+    """Swap adjacent words.
+
+    With probability p, swap two adjacent words in a string. This preserves
+    the vocabulary of input text while changing token order, and in
+    theory should provide more of a challenge to recursive models than ones
+    that rely on lexical distributions.
+
+    Note: to keep the interface consistent, niacin's implementation acts on
+    a probability p, applied n-1 times, where n is the total number of words
+    in the string. In the original paper (eda_), two words are chosen n times
+    and swapped, where n is a count number given as a hyperparameter.
+
+    Args:
+        string: text
+        p: probability of swapping two words
+
+    Returns:
+        enriched text
+
+    .. _eda : https://arxiv.org/abs/1901.11196
+    """
+    words = string.split()
+    index = 0
+    while index < len(words)-1:
+        if random.binomial(1, p):
+            words[index], words[index+1] = words[index+1], words[index]
+            index += 2
+        else:
+            index += 1
+    return " ".join(words)

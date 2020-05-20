@@ -112,3 +112,16 @@ def test_remove_whitespace(string, p, exp):
 def test_add_whitespace(string, p, exp):
     res = char.add_whitespace(string, p)
     assert res == exp
+
+@pytest.mark.parametrize(
+    "string,p,exp",
+    [
+        ("", 0.0, ""),
+        ("", 1.0, ""),
+        ("The man", 0.0, "The man"),
+        ("The man", 1.0, "hT eamn"),
+    ],
+)
+def test_swap_chars(string, p, exp):
+    res = char.swap_chars(string, p)
+    assert res == exp
