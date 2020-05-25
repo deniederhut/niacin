@@ -31,7 +31,7 @@ then you can run the library's tests with
 
 .. code:: sh
 
-    pytest
+    pytest -m 'not slow'
 
 
 if you would like to see the coverage report, you can do so with `pytest-cov`
@@ -40,7 +40,7 @@ like so:
 .. code:: sh
 
     pip install pytest-cov
-    pytest --cov=niacin && coverage html
+    pytest -m 'not slow' --cov=niacin && coverage html
 
 
 How can I install the optional dependencies?
@@ -78,9 +78,9 @@ enrichment:
 
 .. code:: python
 
-    from niacin import text
+    from niacin.text import en
     data = "This is the song that never ends and it goes on and on my friends"
-    print(text.add_misspelling(data, p=1.0))
+    print(en.add_misspelling(data, p=1.0))
 
 .. code:: output
 
@@ -90,9 +90,9 @@ negative sampling:
 
 .. code:: python
 
-    from niacin import text
+    from niacin.text import en
     data = "This is the song that never ends and it goes on and on my friends"
-    print(text.add_hypernyms(data, p=1.0))
+    print(en.add_hypernyms(data, p=1.0))
 
 .. code:: output
 

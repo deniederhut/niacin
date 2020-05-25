@@ -2,7 +2,17 @@
 # -*- encoding: utf-8 -*-
 
 """
-Word-based functions for enriching text data
+Word-based functions for enriching English language data.
+
+Importable functions include:
+
+* add_hypernyms
+* add_hyponyms
+* add_misspelling
+* add_parens
+* add_synonyms
+* remove_articles
+* swap_words
 """
 
 import collections
@@ -28,11 +38,12 @@ ARTICLES = ("the", "a", "an", "these", "those", "his", "hers", "their")
 def _get_wordnet():
     try:
         wn = wordnet.WordNetLemmatizer()
-        wn.lemmatize('this is a test')
+        wn.lemmatize("this is a test")
     except:
         print("Missing wordnet data -- attempting to download")
         import nltk
-        nltk.download('wordnet')
+
+        nltk.download("wordnet")
         wn = wordnet.WordNetLemmatizer()
     return wn
 
@@ -200,14 +211,16 @@ def remove_articles(string: str, p: float = 1.0) -> str:
     """Remove articles from text data.
 
     Matches and removes the following articles:
-        'the',
-        'a',
-        'an',
-        'these',
-        'those',
-        'his',
-        'hers',
-        'their',
+
+    * the
+    * a
+    * an
+    * these
+    * those
+    * his
+    * hers
+    * their
+
     with probability p.
 
     Args:
@@ -229,10 +242,11 @@ def swap_words(string: str, p: float = 0.01) -> str:
     theory should provide more of a challenge to recursive models than ones
     that rely on lexical distributions.
 
-    Note: to keep the interface consistent, niacin's implementation acts on
-    a probability p, applied n-1 times, where n is the total number of words
-    in the string. In the original paper (eda_), two words are chosen n times
-    and swapped, where n is a count number given as a hyperparameter.
+    .. note::
+        to keep the interface consistent, niacin's implementation acts on
+        a probability p, applied n-1 times, where n is the total number of words
+        in the string. In the original paper (eda_), two words are chosen n times
+        and swapped, where n is a count number given as a hyperparameter.
 
     Args:
         string: text
@@ -245,9 +259,9 @@ def swap_words(string: str, p: float = 0.01) -> str:
     """
     words = string.split()
     index = 0
-    while index < len(words)-1:
+    while index < len(words) - 1:
         if random.binomial(1, p):
-            words[index], words[index+1] = words[index+1], words[index]
+            words[index], words[index + 1] = words[index + 1], words[index]
             index += 2
         else:
             index += 1

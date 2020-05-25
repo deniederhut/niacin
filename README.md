@@ -26,9 +26,9 @@ transformed, and the probability of applying a specific transformation.
 enrichment:
 
 ```python
-from niacin import text
+from niacin.text import en
 data = "This is the song that never ends and it goes on and on my friends"
-print(text.add_misspelling(data, p=1.0))
+print(en.add_misspelling(data, p=1.0))
 ```
 
 ```output
@@ -38,9 +38,9 @@ This is teh song tath never ends adn it goes on anbd on my firends
 negative sampling:
 
 ```python
-from niacin import text
+from niacin.text import en
 data = "This is the song that never ends and it goes on and on my friends"
-print(text.add_hypernyms(data, p=1.0))
+print(en.add_hypernyms(data, p=1.0))
 ```
 
 ```output
@@ -72,7 +72,7 @@ pip install pytest
 then you can run the library's tests with
 
 ```sh
-pytest
+pytest -m 'not slow'
 ```
 
 if you would like to see the coverage report, you can do so with `pytest-cov`
@@ -80,7 +80,7 @@ like so:
 
 ```sh
 pip install pytest-cov
-pytest --cov=niacin && coverage html
+pytest -m 'not slow' --cov=niacin && coverage html
 ```
 
 ## How can I install the optional dependencies?

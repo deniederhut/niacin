@@ -3,7 +3,7 @@
 
 import pytest
 
-from niacin.text import word
+from niacin.text.en import word
 
 
 @pytest.mark.parametrize(

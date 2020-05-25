@@ -4,7 +4,7 @@
 
 import pytest
 
-from niacin.text import char
+from niacin.text.en import char
 
 
 @pytest.mark.parametrize(
@@ -63,7 +63,7 @@ def test_add_contractions(string, p, exp):
     ],
 )
 def test_add_expansionss(string, p, exp):
-    res = char.add_expansions(string, p)
+    res = char.remove_contractions(string, p)
     assert res == exp
 
 
