@@ -1,12 +1,12 @@
 #!/usr/bin/env python3
 #-*- encoding: utf-8 -*-
 
-from niacin.text.sentence import Translator
+from niacin.text.en.sentence import _Translator
 
 
 def main():
     """Download and cache the appropriate fairseq models"""
-    Translator.load_models()
+    _Translator.load_models()
 
 
 if __name__ == '__main__':
