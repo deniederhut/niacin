@@ -4,7 +4,7 @@
 
 import pytest
 
-from niacin.text import sentence
+from niacin.text.en import sentence
 
 
 @pytest.mark.parametrize(

@@ -1,11 +1,10 @@
-niacin package
-==============
+niacin api docs
+===============
 
 Subpackages
 -----------
 
 .. toctree::
-
     niacin.text
 
 Module contents

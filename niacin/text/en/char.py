@@ -2,7 +2,20 @@
 # -*- encoding: utf-8 -*-
 
 """
-Character-based functions for enriching text data
+Character-based functions for enriching English language data.
+
+Importable functions include:
+
+* add_characters
+* add_contractions
+* add_fat_thumbs
+* add_leet
+* add_whitespace
+* remove_characters
+* remove_contractions
+* remove_punctuation
+* remove_whitespace
+* swap_chars
 """
 
 import collections
@@ -128,7 +141,7 @@ def add_contractions(string: str, p: float = 0.5) -> str:
     return _sub_chars(string, probability=p, mapping=CONTRACT)
 
 
-def add_expansions(string: str, p: float = 0.5) -> str:
+def remove_contractions(string: str, p: float = 0.5) -> str:
     """Expand a contraction into individual tokens.
 
     See (arXiv:1812.04718_).
@@ -249,11 +262,12 @@ def swap_chars(string: str, p: float = 0.05) -> str:
     character gets swapped more than once, so cannot end up in any locations
     that are not adjacent to its starting position.
 
-    Note: to keep the interface consistent, niacin's implementation acts on
-    a probability p, applied n-1 times, where n is the total number of
-    characters in the string. The implementation in noisemix_ (called
-    ``flip_chars``) chooses two letters at random and exchanges their
-    positions, exactly once per string.
+    .. note::
+        to keep the interface consistent, niacin's implementation acts on
+        a probability p, applied n-1 times, where n is the total number of
+        characters in the string. The implementation in noisemix_ (called
+        ``flip_chars``) chooses two letters at random and exchanges their
+        positions, exactly once per string.
 
     Args:
         string: text
@@ -266,9 +280,9 @@ def swap_chars(string: str, p: float = 0.05) -> str:
     """
     chars = list(string)
     index = 0
-    while index < len(chars)-1:
+    while index < len(chars) - 1:
         if random.binomial(1, p):
-            chars[index], chars[index+1] = chars[index+1], chars[index]
+            chars[index], chars[index + 1] = chars[index + 1], chars[index]
             index += 2
         else:
             index += 1

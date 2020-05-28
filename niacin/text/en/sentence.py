@@ -2,7 +2,14 @@
 # -*- encoding: utf-8 -*-
 
 """
-Sentence-based functions for enriching text data
+Sentence-based functions for enriching English language data.
+
+Importable functions include:
+
+* add_applause
+* add_backtranslation
+* add_bytes
+* add_love
 """
 
 import regex
@@ -13,7 +20,25 @@ import warnings
 P_SPACE = regex.compile(r"(\s+)")
 
 
-class Translator:
+class _Translator:
+    """Wrapper around fairseq language models (arXiv:1904.01038_).
+
+    On first initialization, the instance loads language models and stores
+    them as attributes on the class. New instances after this do not reload
+    them. Currently implements translation from English to German, and the
+    reverse.
+
+    Attributes
+    ----------
+    en2de: callable
+        translate from English to German
+    de2en: callable
+        translate from German to English
+    translators: dict
+        mapping of model names to model objects
+
+    .. _arXiv:1904.01038 : https://arxiv.org/abs/1904.01038
+    """
 
     translators: dict = {}
 
@@ -126,9 +151,9 @@ def add_backtranslation(string: str, p: float = 0.5) -> str:
 
     Use a fairseq model to translate a sentence from Enligh into German,
     then translate the German back into English with another fairseq model
-    (_arXiv:1904.01038). Anecdotally, this generates sequences with similar
+    (arXiv:1904.01038_). Anecdotally, this generates sequences with similar
     semantic content, but different word choices, and is a popular way to
-    augment small datasets in high resource languages (_arXiv:1904.12848).
+    augment small datasets in high resource languages (arXiv:1904.12848_).
 
     .. warning::
         Backtranslation uses large neural machine translation (NMT)
@@ -152,6 +177,6 @@ def add_backtranslation(string: str, p: float = 0.5) -> str:
     if not string:
         return string
     if random.binomial(1, p):
-        t = Translator()
+        t = _Translator()
         string = t.backtranslate(string)
     return string

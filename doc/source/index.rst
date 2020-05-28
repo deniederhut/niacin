@@ -21,10 +21,11 @@ ENRICHMENT and NEGATIVE SAMPLING, respectively.
 
 
 .. toctree::
-   :maxdepth: 2
+   :maxdepth: 3
 
    quickstart
-   niacin.text
+   user_guide/index
+   niacin
 
 
 Indices and tables
