@@ -11,7 +11,7 @@ with open('requirements.txt') as f:
 
 setup(
     name='niacin',
-    version='0.2.0',
+    version='0.3.0',
     packages=find_packages(),
     package_data={
         'niacin': ['data/*', 'py.typed']
