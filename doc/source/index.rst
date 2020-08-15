@@ -6,6 +6,9 @@
 Welcome to niacin's documentation!
 ==================================
 
+.. image:: https://joss.theoj.org/papers/10.21105/joss.02136/status.svg
+   :target: https://doi.org/10.21105/joss.02136
+
 A Python library for replacing the missing variation in your data.
 
 
