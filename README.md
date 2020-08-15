@@ -6,6 +6,7 @@ A Python library for replacing the missing variation in your text data.
 [![travis](https://travis-ci.org/deniederhut/niacin.svg?branch=master)](https://travis-ci.org/deniederhut/niacin/)
 [![codecov](https://codecov.io/gh/deniederhut/niacin/branch/master/graph/badge.svg)](https://codecov.io/gh/deniederhut/niacin)
 [![readthedocs](https://readthedocs.org/projects/niacin/badge/?version=latest)](https://niacin.readthedocs.io/en/latest/?badge=latest)
+[![DOI](https://joss.theoj.org/papers/10.21105/joss.02136/status.svg)](https://doi.org/10.21105/joss.02136)
 
 
 ## Why should I use this?
