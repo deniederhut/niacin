@@ -1,7 +1,5 @@
-niacin.text.en
-==============
-
-The niacin.text.en package contains functions for augmenting English text data.
+niacin.text.en package
+======================
 
 Submodules
 ----------

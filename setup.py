@@ -9,6 +9,16 @@ with open('README.md') as f:
 with open('requirements.txt') as f:
     install_requirements = f.read().splitlines()
 
+extras = {}
+combined = set()
+for extra in ('backtranslate', 'torch'):
+    with open(extra + '-requirements.txt') as f:
+        requirements = f.read().splitlines()
+    extras[extra] = requirements
+    combined.update(requirements)
+extras['all'] = sorted(combined)
+
+
 setup(
     name='niacin',
     version='0.3.0',
@@ -18,10 +28,7 @@ setup(
     },
     python_requires=">=3.6",
     install_requires=install_requirements,
-    extras_require={
-        'all': ['fairseq', 'fastbpe', 'sacremoses', 'torch'],
-        'backtranslate': ['fairseq', 'fastbpe', 'sacremoses', 'torch']
-    },
+    extras_require=extras,
     long_description=desc,
     long_description_content_type="text/markdown",
     tests_require=[
