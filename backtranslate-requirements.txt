@@ -1,0 +1,4 @@
+fairseq
+fastbpe
+sacremoses
+torch
