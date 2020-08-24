@@ -24,9 +24,9 @@ copyright = '2018, Dillon Niederhut'
 author = 'Dillon Niederhut'
 
 # The short X.Y version
-version = '0.2.0'
+version = '0.4'
 # The full version, including alpha/beta/rc tags
-release = ''
+release = '0.4.0'
 
 
 # -- General configuration ---------------------------------------------------
