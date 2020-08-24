@@ -6,6 +6,7 @@ Subpackages
 
 .. toctree::
 
+    niacin.augment
     niacin.text
 
 Module contents

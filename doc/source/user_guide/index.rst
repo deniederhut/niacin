@@ -4,6 +4,7 @@ niacin user guide
 .. toctree::
    :maxdepth: 3
 
-   with_pytorch
    text_en
+   with_randaugment
+   with_pytorch
 
