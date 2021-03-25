@@ -1,8 +1,7 @@
 #!/usr/bin/env python
 # -*- coding: utf-8
 
-"""
-
+"""Frequency domain transforms
 """
 
 import numpy as np
