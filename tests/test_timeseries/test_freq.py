@@ -27,7 +27,7 @@ def test_add_discrete_phase_shifts(x, p, m):
     else:
         assert np.not_equal(res, x).all()
         f_res = rfft(res)
-        assert f_res.argmax() in (2, 4)
+        assert f_res.argmax() in (2, 3, 4)
 
 
 @pytest.mark.parametrize(

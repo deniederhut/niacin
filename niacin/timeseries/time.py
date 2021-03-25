@@ -304,8 +304,9 @@ def crop_and_stretch(x: np.ndarray,  p: float=0.01, m: float=0.1, interp_method:
     """
     old_size = len(x)
     crop_size = round((1-m) * old_size)
-    if crop_size < 1:
-        # if m is so small there is no crop, just return
+    if (crop_size < 1) or (crop_size >= old_size):
+        # if m << there might be no crop
+        # if m >> the crop might be equal to length of sequence
         return x
     if random.binomial(1, p):
         start = random.randint(0, old_size-crop_size, 1).item()

@@ -88,8 +88,8 @@ def test_add_warp(x, p, m):
     if (p == 0.0) or (m == 0.0):
         np.testing.assert_almost_equal(res, x)
     else:
-        assert np.not_equal(res, x).all()
-        assert all(x.min() < res < x.max())
+        assert np.not_equal(res, x).any()
+        assert all((x.min() < res) & (res < x.max()))
 
 
 @pytest.mark.parametrize(
@@ -109,7 +109,7 @@ def test_crop_and_stretch(x, p, m):
     elif (p == 1.0) and (m == 1.0):
         np.testing.assert_almost_equal(res, x)
     else:
-        assert np.not_equal(res, x).all()
+        assert np.not_equal(res, x).any()
 
 
 @pytest.mark.parametrize(
