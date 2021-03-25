@@ -22,6 +22,9 @@ variance; and, for creating similar-but-incorrect examples to aid in
 reducing the total size of the hypothesis space. These are commonly known as
 ENRICHMENT and NEGATIVE SAMPLING, respectively.
 
+Currently, niacin supports augmentation strategies for English language text
+and timeseries data.
+
 Are you using ``niacin`` with PyTorch's data loaders? See :ref:`with-pytorch`.
 
 .. toctree::

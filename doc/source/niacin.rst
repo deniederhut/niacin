@@ -8,6 +8,7 @@ Subpackages
 
     niacin.augment
     niacin.text
+    niacin.timeseries
 
 Module contents
 ---------------
