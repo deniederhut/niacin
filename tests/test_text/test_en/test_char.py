@@ -3,6 +3,7 @@
 
 
 import pytest
+from unittest.mock import patch
 
 from niacin.text.en import char
 
@@ -112,6 +113,23 @@ def test_remove_whitespace(string, p, exp):
 def test_add_whitespace(string, p, exp):
     res = char.add_whitespace(string, p)
     assert res == exp
+
+@pytest.mark.parametrize(
+    "string,p,choice,exp",
+    [
+        ("", 0.0, 0, ""),
+        ("", 1.0, 2, ""),
+        ("haircut", 0.0, 0, "haircut"),
+        ("haircut", 1.0, 0, ""),
+        ("haircut", 0.0, 2, "haircut"),
+        ("haircut", 1.0, 2, "hhaaiirrccuutt"),
+    ],
+)
+def test_add_macbook_keyboard(string, p, choice, exp):
+    with patch('niacin.text.en.char.random.choice', return_value=choice) as mock:
+        res = char.add_macbook_keyboard(string, p)
+        assert res == exp
+
 
 @pytest.mark.parametrize(
     "string,p,exp",
