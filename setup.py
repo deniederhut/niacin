@@ -21,7 +21,7 @@ extras['all'] = sorted(combined)
 
 setup(
     name='niacin',
-    version='0.5.0',
+    version='0.5.1',
     packages=find_packages(),
     package_data={
         'niacin': ['data/*', 'py.typed']
