@@ -10,6 +10,7 @@ Importable functions include:
 * add_contractions
 * add_fat_thumbs
 * add_leet
+* add_macbook_keyboard
 * add_whitespace
 * remove_characters
 * remove_contractions
@@ -179,6 +180,28 @@ def add_leet(string: str, p: float = 0.2) -> str:
         enriched text
     """
     return _sub_chars(string, probability=p, mapping=LEETMAP)
+
+
+def add_macbook_keyboard(string: str, p: float = 0.1) -> str:
+    """Repeats or removes each character with probability p.
+
+    Bad keyboards can be a common source of typographical errors by
+    repeating characters or by omitting them, e.g. because the individual
+    keys get stuck. With probability p, we modify a character, with a
+    50/50 chance of either removing it, or repeating it twice.
+
+    Args:
+        string: text
+        p: probability of changing letter count
+
+    Returns:
+        enriched text
+    """
+    for index in reversed(range(len(string))):
+        if random.binomial(1, p):
+            count = random.choice([0, 2])
+            string = string[:index] + string[index]*count + string[index+1:]
+    return string
 
 
 def add_whitespace(string: str, p: float = 0.01) -> str:

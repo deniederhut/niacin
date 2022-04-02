@@ -14,6 +14,7 @@ Character-based
 * add_contractions
 * add_fat_thumbs
 * add_leet
+* add_macbook_keyboard
 * add_whitespace
 * remove_characters
 * remove_contractions
@@ -47,6 +48,7 @@ from .char import (
     remove_contractions,
     add_fat_thumbs,
     add_leet,
+    add_macbook_keyboard,
     add_whitespace,
     remove_characters,
     remove_punctuation,
