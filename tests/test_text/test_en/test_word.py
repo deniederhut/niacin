@@ -47,8 +47,9 @@ def test_add_misspellings(string, p, exp):
     [
         ("", 0.0, ""),
         ("", 1.0, ""),
-        ("It has a feud", 0.0, "It ha a feud"),
-        ("It has a feud", 1.0, "It ha a vendetta"),
+        ("It has a feud", 0.0, "It has a feud"),
+        ("It has a feud", 1.0, "It has a vendetta"),
+        ("he was", 1.0, "he was")  # https://github.com/deniederhut/niacin/issues/39
     ],
 )
 def test_add_hyponyms(string, p, exp):
@@ -61,8 +62,9 @@ def test_add_hyponyms(string, p, exp):
     [
         ("", 0.0, ""),
         ("", 1.0, ""),
-        ("It has a sore", 0.0, "It ha a sore"),
-        ("It has a sore", 1.0, "It ha a infection"),
+        ("It has a sore", 0.0, "It has a sore"),
+        ("It has a sore", 1.0, "It has a infection"),
+        ("he was", 1.0, "he was")  # https://github.com/deniederhut/niacin/issues/39
     ],
 )
 def test_add_hypernyms(string, p, exp):
@@ -77,6 +79,7 @@ def test_add_hypernyms(string, p, exp):
         ("", 1.0, ""),
         ("It is computable", 0.0, "It is computable"),
         ("It is computable", 1.0, "It is estimable"),
+        ("he was", 1.0, "he was")  # https://github.com/deniederhut/niacin/issues/39
     ],
 )
 def test_add_synonyms(string, p, exp):
