@@ -94,10 +94,11 @@ def add_hypernyms(string: str, p: float = 0.01) -> str:
     .. _wordnet: https://wordnet.princeton.edu/
     """
     wn = _get_wordnet()
-    words = [wn.lemmatize(w) for w in string.split()]
-    for index, word in enumerate(words):
-        if (word in HYPERNYMS) and random.binomial(1, p):
-            words[index] = random.choice(HYPERNYMS[word])
+    words = string.split()
+    lemmas = [wn.lemmatize(w) for w in words]
+    for index, lemma in enumerate(lemmas):
+        if (lemma in HYPERNYMS) and random.binomial(1, p):
+            words[index] = random.choice(HYPERNYMS[lemma])
     return " ".join(words)
 
 
@@ -124,10 +125,11 @@ def add_hyponyms(string: str, p: float = 0.01) -> str:
     .. _wordnet: https://wordnet.princeton.edu/
     """
     wn = _get_wordnet()
-    words = [wn.lemmatize(w) for w in string.split()]
-    for index, word in enumerate(words):
-        if (word in HYPONYMS) and random.binomial(1, p):
-            words[index] = random.choice(HYPONYMS[word])
+    words = string.split()
+    lemmas = [wn.lemmatize(w) for w in words]
+    for index, lemma in enumerate(lemmas):
+        if (lemma in HYPONYMS) and random.binomial(1, p):
+            words[index] = random.choice(HYPONYMS[lemma])
     return " ".join(words)
 
 
@@ -200,10 +202,11 @@ def add_synonyms(string: str, p: float = 0.01) -> str:
     .. _wordnet: https://wordnet.princeton.edu/
     """
     wn = _get_wordnet()
-    words = [wn.lemmatize(w) for w in string.split()]
-    for index, word in enumerate(words):
-        if (word in SYNONYMS) and random.binomial(1, p):
-            words[index] = random.choice(SYNONYMS[word])
+    words = string.split()
+    lemmas = [wn.lemmatize(w) for w in words]
+    for index, lemma in enumerate(lemmas):
+        if (lemma in SYNONYMS) and random.binomial(1, p):
+            words[index] = random.choice(SYNONYMS[lemma])
     return " ".join(words)
 
 
